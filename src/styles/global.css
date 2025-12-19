@@ -1,0 +1,31 @@
+:root{ color-scheme: dark; }
+body{ background:#0b0b0c; color:#eaeaea; }
+a{ color: inherit; }
+.app-shell{ display:flex; min-height:100vh; }
+.app-main{ flex:1; padding:32px; max-width:1120px; }
+.page{ padding-top: 6px; }
+.page-title{ font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing:-0.02em; margin:0; }
+.page-header{ margin-bottom: 10px; }
+.page-marquee{
+  font-size: clamp(1.8rem, 5vw, 3.4rem);
+  letter-spacing:-0.02em;
+  line-height: 1.0;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: .95;
+}
+.page-marquee span{ margin-right: 22px; opacity: .25; }
+.lead{ max-width: 62ch; }
+.grid-two{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.card-dark{ background:#111114; color:#eaeaea; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.form-dark{ background:#09090a !important; color:#eaeaea !important; border: 1px solid rgba(255,255,255,.14) !important; }
+.form-dark::placeholder{ color: rgba(234,234,234,.55) !important; }
+
+@media (max-width: 992px){
+  .app-main{ padding:20px; }
+  .grid-two{ grid-template-columns: 1fr; }
+}
+
+/* Home overrides */
+body.home-light .sidenav{ display:none; }
+body.home-light .app-main{ max-width:none; padding:0; }
