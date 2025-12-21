@@ -1,9 +1,26 @@
+import { useMemo, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import Page from '../components/Page.jsx'
 import { profile } from '../data/profile.js'
 
+import '../styles/about.css'
+
+
 export default function About() {
+  const location = useLocation()
+  const shouldShowHeroTop = Boolean(location.state?.fromHome && location.state?.moveHero3DToTop)
+
+// Hero3D necesita mouseX; en About lo dejamos “quieto” (0)
+  const mouseX = useRef(0)
+
   return (
     <Page title="About">
+      {shouldShowHeroTop && (
+        <div className="about-hero3d-top">
+          
+        </div>
+      )}
+
       <p className="lead mt-3">{profile.about.headline}</p>
 
       <div className="mt-4 grid-two">

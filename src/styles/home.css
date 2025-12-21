@@ -54,13 +54,19 @@ body.home-light a { color: inherit; }
 }
 
 .home-bigword{
-  margin-top: 10px;
-  font-size: clamp(4.2rem, 10vw, 10rem);
-  letter-spacing: -0.04em;
-  font-weight: 300;
-  line-height: 0.95;
+  grid-column: 1 / -1;   /* ocupa todo el ancho del header grid */
+  width: 100%;
   text-align: center;
+
+  margin-top: 18px;
+  line-height: 1;
+
+  font-size: clamp(3.8rem, 10vw, 8rem);
+  font-family: 'Aboreto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.04em;
 }
+
 
 .home-center{
   position: relative;
@@ -111,33 +117,31 @@ body.home-light a { color: inherit; }
 
 /* OVERLAY BAND */
 .home-overlay{
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 34%;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 34%;
-  height: 32%;
+  position: fixed;
+  inset: 0;
   background: #111a1d;
 
   z-index: 10;
   pointer-events: none;
 
-  /* estado cerrado (ojo cerrado) */
-  clip-path: inset(50% 0 50% 0 round 0px);
-
-  transition-property: clip-path;
-  transition-duration: 950ms;
-  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  clip-path: inset(65% 0 65% 0 round 0px);
+  transition: clip-path 950ms cubic-bezier(.4, 0, .2, 1);
 }
 
+
+/* hover: banda */
 .home-overlay.on{
-  /* ojo abierto: banda completa */
+  clip-path: inset(49% 0 25% 0);
+  transform-origin: center center;
+}
+
+/* click: full screen */
+.home-overlay.full{
   clip-path: inset(0 0 0 0 round 0px);
-  filter: blur(0);
+}
+.home-landing.isTransitioning .home-overlay-text{
+  opacity: 0;
+  transition: none;
 }
 
 /* BIG TITLE */
@@ -193,15 +197,14 @@ body.home-light a { color: inherit; }
 .home-3d-wrap{
   position: absolute;
   left: 50%;
-  top: 16%;                  /* <- entre el "Hola" y el menú */
+  top: 15%;
   transform: translate(-50%, -50%);
-
-  width: min(520px, 78vw);   /* sutil */
-  height: min(300px, 34vh);  /* sutil */
-
-  z-index: 45;               /* arriba de la banda, debajo del menú */
+  width: min(900px, 96vw);
+  height: min(260px, 24vh);
+  z-index: 45;
   pointer-events: none;
 }
+
 
 .home-footer-role{
   position: absolute;
@@ -224,4 +227,113 @@ body.home-light a { color: inherit; }
   .home-top{ grid-template-columns: 1fr auto; grid-template-rows: auto auto; }
   .home-folio{ grid-column: 2; }
   .home-brand{ grid-column: 1 / span 2; text-align: left; margin-top: 6px; }
+}
+/* =========================
+   ROUTE TRANSITION (PORTAL)
+   ========================= */
+
+.rt-layer{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.rt-layer .rt-overlay{
+  position: absolute;
+  inset: 0;
+  background: #000;
+
+  clip-path: inset(65% 0 65% 0 round 0px);
+  transition: clip-path 950ms cubic-bezier(.4, 0, .2, 1), opacity 360ms ease;
+  opacity: 1;
+}
+
+.rt-layer.rt-on .rt-overlay{
+  clip-path: inset(47% 0 27% 0);
+}
+
+.rt-layer.rt-full .rt-overlay{
+  clip-path: inset(0 0 0 0 round 0px);
+}
+
+/* Texto gigante */
+.rt-layer .rt-text{
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  /* mismo “contenedor visual” que .home-center */
+  top: var(--rt-top, 0px);
+  height: var(--rt-height, 100vh);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.02em;
+
+  font-size: clamp(4.5rem, 11vw, 11rem);
+  letter-spacing: -0.04em;
+  font-weight: 300;
+  color: rgba(255,255,255,0.35);
+
+  user-select: none;
+}
+/* En click: NO repetir animación de entrada (texto queda ya visible) */
+.rt-layer.rt-on.rt-noin:not(.rt-text-out) .rt-char{
+  animation: none;
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+
+
+/* Estado base */
+.rt-layer .rt-char{
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+}
+
+/* Entrada: igual idea que tu overlayCharIn */
+.rt-layer.rt-on .rt-char{
+  animation: rtCharIn 900ms cubic-bezier(.2,.9,.2,1) both;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+@keyframes rtCharIn{
+  from{ opacity: 0; transform: translateY(18px); filter: blur(6px); }
+  to  { opacity: 1; transform: translateY(0);  filter: blur(0); }
+}
+
+/* SALIDA: inverso (tu pedido) */
+.rt-layer.rt-text-out .rt-char{
+  animation: rtCharOut 700ms cubic-bezier(.4, 0, .2, 1) both;
+  animation-delay: calc(var(--ri) * 60ms);
+}
+
+
+@keyframes rtCharOut{
+  from{ opacity: 1; transform: translateY(0);  filter: blur(0); }
+  to  { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+}
+
+/* Apagado del overlay después de navegar */
+.rt-layer.rt-fadeout .rt-overlay{
+  opacity: 0;
+}
+.rt-layer.rt-fadeout .rt-text{
+  opacity: 0;
+  transition: opacity 360ms ease;
+}
+.home-landing.isTransitioning .home-menu{
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+.home-landing.isTransitioning .home-3d-wrap{
+  opacity: 0;
+  transition: opacity 120ms ease;
 }

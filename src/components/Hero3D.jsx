@@ -3,6 +3,7 @@ import { Environment, useGLTF } from '@react-three/drei'
 import React, { useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
+
 class ModelErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
@@ -35,6 +36,17 @@ function FallbackModel() {
   )
 }
 
+function GLBModel({ url }) {
+  const gltf = useGLTF(url)
+  return <primitive object={gltf.scene} />
+}
+
+function ModelSwitch({ url }) {
+  if (!url || !String(url).toLowerCase().endsWith('.glb')) return <FallbackModel />
+  return <GLBModel url={url} />
+}
+
+
 function ParallaxRig({ mouseX, children }) {
   const rig = useRef(null)
 
@@ -61,16 +73,12 @@ function ParallaxRig({ mouseX, children }) {
   return <group ref={rig}>{children}</group>
 }
 
-function GLBModel({ url }) {
-  const gltf = useGLTF(url)
-  return <primitive object={gltf.scene} />
-}
 
 export default function Hero3D({ modelUrl = '', mouseX }) {
   return (
     <div className="home-3d-wrap" aria-hidden="true">
       <Canvas camera={{ position: [0, 0.8, 3.7], fov: 45 }} dpr={[1, 2]}>
-        <ambientLight intensity={0.7} />
+        <ambientLight intensity={0.1} />
         <directionalLight position={[3, 4, 2]} intensity={1.2} />
         <ParallaxRig mouseX={mouseX}>
           <group scale={0.85} position={[0, -0.6, 0]} rotation={[0, 0, 0]}>
@@ -85,7 +93,3 @@ export default function Hero3D({ modelUrl = '', mouseX }) {
   )
 }
 
-function ModelSwitch({ url }) {
-  if (!url || !String(url).toLowerCase().endsWith('.glb')) return <FallbackModel />
-  return <GLBModel url={url} />
-}

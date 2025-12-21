@@ -1,0 +1,16 @@
+.about-hero3d-top{
+  width: 100%;
+  height: 260px;           /* ajustá según tu modelo */
+  margin-top: 8px;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* fuerza el canvas/scene a ocupar el contenedor */
+.about-hero3d-top canvas,
+.about-hero3d-top > *{
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}

@@ -1,6 +1,6 @@
 export const profile = {
   brand: 'Oscar Ortiz Dev Studio™',
-  kicker: 'Full‑Stack Senior · Data Science Senior · Estadístico',
+  kicker: 'Full‑Stack · Data Science ',
   counter: '0 / 301',
   availability: 'Disponible para colaboraciones, consultorías y ofertas',
   folioTag: "Folio '25",
@@ -8,24 +8,24 @@ export const profile = {
   resume: { label: 'CV', url: '/cv' }, // cambia a tu PDF/drive
   socials: [
     { label: 'GitHub', value: 'OAODesarrollador', url: 'https://github.com/OAODesarrollador' },
-    { label: 'LinkedIn', value: 'Oscar Ortiz', url: 'https://www.linkedin.com/' },
+    { label: 'LinkedIn', value: 'Oscar Alejandro Ortiz', url: 'https://www.linkedin.com/in/oscar-alejandro-ortiz-desarrollador-fullstack/' },
     { label: 'WhatsApp', value: '+54 3704 054127', url: 'https://wa.me/543704054127' },
-    { label: 'Email', value: 'contacto', url: 'mailto:oscar.ortiz.devstudio@gmail.com' },
+    { label: 'Email', value: 'contacto', url: 'mailto:oaodesarrollador@gmail.com' },
   ],
-  location: { country: 'Argentina', city: 'Córdoba Capital' },
+  location: { country: 'Argentina', city: 'Formosa Capital' },
   hero: {
-    title: 'Oscar Ortiz',
+    title: 'Oscar Alejandro Ortiz',
     subtitle:
       'Full‑Stack  (React/Node) + Data Science. Construyo sistemas y tableros que no se rompen con la realidad.',
   },
   home: {
     openLine1: 'Open for any',
     openLine2: 'collaborations and offers',
-    brandTop: '',
+    brandTop: 'OAO Dev Studio™',
     folioTop: 'Folio',
     folioYear: "'25",
     bigWord: 'Hola !',
-    roleLine: 'Oscar Alejandro Ortiz, Full‑Stack Senior Developer, Data Scientist',
+    roleLine: 'Oscar Alejandro Ortiz, Full‑Stack Developer orientado a Data Science.',
     modelUrl: '/src/models/robotAnuncio2.glb', 
   },
 
