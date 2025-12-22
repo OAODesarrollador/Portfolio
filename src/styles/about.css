@@ -1,16 +1,269 @@
-.about-hero3d-top{
-  width: 100%;
-  height: 260px;           /* ajustá según tu modelo */
-  margin-top: 8px;
-  margin-bottom: 18px;
-  position: relative;
-  overflow: hidden;
+
+
+
+.about-header{
+  display: grid;
+  grid-template-columns:  1fr;
+  gap: 18px;
+  align-items: center;
+  margin: 0;
+  position: relative; /* NO fixed */
 }
 
-/* fuerza el canvas/scene a ocupar el contenedor */
-.about-hero3d-top canvas,
-.about-hero3d-top > *{
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
+.about-photo{
+  width: 280px;
+  height: 340px;
+  border-radius: 22px;
+  object-fit: cover;
+
+  /* sin recuadro */
+  border: none;
+  box-shadow: none;
+}
+
+.about-fullbleed{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.about-intro{ min-width: 0; }
+
+.about-name{
+  font-weight: 700;
+  letter-spacing: .01em;
+  font-size: 18px;
+}
+
+.about-role{
+  opacity: .85;
+  margin-top: 6px;
+  line-height: 1.25;
+}
+
+.about-meta{
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  opacity: .7;
+  font-size: 12px;
+}
+
+/* Stacked sections: cada sección se pega y la siguiente pasa por arriba */
+.about-section{
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center ;
+  z-index: 1;
+  padding: 0;
+}
+
+.about-section-inner{
+  width: 75%;
+  max-width: 1200px;   /* opcional: para que no se estire infinito en monitores grandes */
+  margin: 0 auto;
+  padding: 96px 32px;
+  display: grid;
+  gap: 22px;
+  align-content: center;
+}
+
+
+
+/* Altura mínima para que el stacking se note */
+/* Cada sección ocupa una pantalla completa */
+#about.about-section{
+  min-height: 100vh;
+  
+  z-index: 1;
+  background: #0b0b0c; /* color 1 */
+}
+
+#expertise.about-section{
+  min-height: 100vh;
+  z-index: 2;
+  background: #404041; /* color 2 (medio) */
+
+  /* contraste sutil */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 -1px 0 rgba(0,0,0,.35);
+}
+
+#process.about-section{
+  min-height: 100vh;
+  z-index: 3;
+  background: #0d0d10; /* color 3 */
+}
+
+.about-toc{
+  position: static;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+  opacity: .8;
+  font-size: 12px;
+ 
+}
+
+/* fuerza que el nav ocupe todo el ancho del header-inner */
+body.about-full .page-header-inner .about-toc{
+  width: 100%;
+  justify-content: flex-end;
+}
+
+
+.about-toc a{
+  text-decoration: none;
+  color: rgba(255,255,255,.75);
+  border-bottom: 1px solid rgba(255,255,255,.18);
+  padding-bottom: 2px;
+}
+.about-toc a:hover{
+  color: rgba(255,255,255,.95);
+  border-bottom-color: rgba(255,255,255,.35);
+}
+
+.about-headline{
+  font-size: clamp(22px, 2.8vw, 34px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  opacity: .92;
+  max-width:none;
+}
+
+.about-traits{
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.about-pill{
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  opacity: .9;
+}
+
+.about-section-title{
+  position: absolute;
+  left: 100px;                 /* margen desde el borde */
+  top: 50%;
+  transform: translateY(-50%);
+  
+  writing-mode: vertical-rl;  /* CLAVE: vertical real */
+  text-orientation: mixed;
+  transform: translateY(-50%) rotate(180deg);
+  font-size: 12px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  opacity: .55;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+
+.about-process{
+  display: grid;
+  gap: 14px;
+}
+
+.about-process-item{
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 12px;
+  padding: 14px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+}
+
+.about-process-key{
+  opacity: .75;
+  font-size: 12px;
+}
+
+.about-process-title{
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+
+.about-process-text{
+  margin-top: 6px;
+  opacity: .85;
+  line-height: 1.5;
+  font-size: 14px;
+}
+.about-process-text,
+.about-role{
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
+
+@media (max-width: 520px){
+  .about-section-inner{
+    padding: 86px 16px 56px;
+  }
+  
+  .about-headline{
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px){
+  .about-section-title{
+    position: static;
+    writing-mode: horizontal-tb;
+    transform: none;
+    margin-bottom: 12px;
+    opacity: .7;
+  }
+
+  .about-section-inner{
+    padding-left: 0;
+  }
+}
+
+/* scroll suave para el toc (tipo huyml) */
+html{ scroll-behavior: smooth; }
+
+
+/* TOC activo */
+
+.about-toc a.active{
+  opacity: 1;
+  border-bottom-color: rgba(255,255,255,.6);
+}
+
+/* Hover microinteraction: underline “vivo” */
+.about-toc a{
+  position: relative;
+}
+.about-toc a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  height:1px;
+  width:100%;
+  background: rgba(255,255,255,.7);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+  opacity:.8;
+}
+.about-toc a:hover::after{
+  transform: scaleX(1);
 }
