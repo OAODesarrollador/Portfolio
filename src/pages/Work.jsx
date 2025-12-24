@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Page from '../components/Page.jsx'
 import { work } from '../data/work.js'
 import '../styles/work.css'
@@ -86,9 +86,43 @@ function startInertia() {
 
   rafLoop.current = requestAnimationFrame(tick)
 }
-function onLeave() {
-  setActiveGif(null)
-  rafLoop.current = 0
+
+const [modalOpen, setModalOpen] = useState(false)
+const [modalClosing, setModalClosing] = useState(false)
+const [activeItem, setActiveItem] = useState(null)
+
+useEffect(() => {
+  if (!modalOpen) return
+
+  const html = document.documentElement
+  const prevBody = document.body.style.overflow
+  const prevHtml = html.style.overflow
+
+  document.body.style.overflow = 'hidden'
+  html.style.overflow = 'hidden'
+
+  return () => {
+    document.body.style.overflow = prevBody
+    html.style.overflow = prevHtml
+  }
+}, [modalOpen])
+
+
+function openModal(item, e) {
+  if (e) e.preventDefault()
+  setActiveItem(item)
+  setModalClosing(false)
+  setModalOpen(true)
+}
+
+function closeModal() {
+  setModalClosing(true)
+  // esperar que termine la animación CSS
+  window.setTimeout(() => {
+    setModalOpen(false)
+    setModalClosing(false)
+    setActiveItem(null)
+  }, 260)
 }
 
   return (
@@ -124,10 +158,12 @@ function onLeave() {
                 className="projects_item_wrap"
                 href={w.href}
                 role="listitem"
+                onClick={(e) => openModal(w, e)}
                 onPointerEnter={() => onEnter(w)}
                 onPointerLeave={onLeave}
                 onPointerMove={movePreview}
               >
+
                 <div className="projects_item_inner mt-4">
                   <div className="projects_item_title">{w.title}</div>
 
@@ -140,7 +176,66 @@ function onLeave() {
             ))}
           </div>
         </section>
-      
+      {modalOpen && activeItem && (
+        <div
+          className={`work-modal ${modalClosing ? 'is-closing' : 'is-open'}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Detalles de ${activeItem.title}`}
+          onMouseDown={(e) => {
+            if (e.target.classList.contains('work-modal')) closeModal()
+          }}
+        >
+          <div className="work-modal__panel">
+            <button className="work-modal__close" onClick={closeModal} aria-label="Cerrar">×</button>
+
+            {/* IZQUIERDA: contenido */}
+            <div className="work-modal__content">
+              <header className="work-modal__header">
+                <h2 className="work-modal__title">{activeItem.title}</h2>
+                <div className="work-modal__meta">
+                  <span>{activeItem.client}</span>
+                  <span>{activeItem.year}</span>
+                </div>
+              </header>
+
+              <div className="work-modal__body">
+                {activeItem.modal?.tagline && <p className="work-modal__tagline">{activeItem.modal.tagline}</p>}
+
+                {activeItem.modal?.sections?.map((sec, i) => (
+                  <section key={i} className="work-modal__section">
+                    <h3>{sec.title}</h3>
+                    <ul>
+                      {sec.bullets.map((b, j) => <li key={j}>{b}</li>)}
+                    </ul>
+                  </section>
+                ))}
+              </div>
+
+              <footer className="work-modal__footer">
+                {activeItem.modal?.ctas?.map((c, i) => (
+                  <a
+                    key={i}
+                    className="work-modal__link"
+                    href={c.url}
+                    target={c.url.startsWith('http') ? '_blank' : undefined}
+                    rel={c.url.startsWith('http') ? 'noreferrer' : undefined}
+                  >
+                    {c.label}
+                  </a>
+                ))}
+              </footer>
+            </div>
+
+            {/* DERECHA: GIF */}
+            <aside className="work-modal__media" aria-hidden="true">
+              <img src={activeItem.image} alt="" />
+            </aside>
+          </div>
+
+        </div>
+      )}
+
     </Page>
     </>
   )
