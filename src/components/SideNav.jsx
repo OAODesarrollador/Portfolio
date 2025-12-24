@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import { routes } from '../app/routes.jsx'
 import { profile } from '../data/profile.js'
 import '../styles/sidenav.css'
@@ -55,7 +55,14 @@ export default function SideNav() {
           <div className="navdrawer-kicker">{profile.kicker}</div>
           <div className="navdrawer-counter">{profile.counter}</div>
           <div className="navdrawer-sub">{profile.availability}</div>
-          <div className="navdrawer-brand">{profile.brand}</div>
+          <Link
+            to="/"
+            className="navdrawer-brand"
+            onClick={() => setOpen(false)}
+          >
+            {profile.brand}
+          </Link>
+
           <div className="navdrawer-meta">{profile.folioTag}</div>
         </div>
 

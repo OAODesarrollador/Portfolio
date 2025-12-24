@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-export default function Page({ title, children, marquee = false, headerExtra = null }) {
+export default function Page({ title, children, marquee = false, headerExtra = null, pageClass = '' }) {
+
   const ref = useRef(null)
 
   useEffect(() => {
@@ -13,22 +14,25 @@ export default function Page({ title, children, marquee = false, headerExtra = n
     )
   }, [title])
 
+  const centered = title === 'About' || title === 'Work'
+
   return (
-    <section ref={ref} className="page">
+    <section ref={ref} className={`page ${pageClass}`}>
       <header className="page-header">
-      <div className="page-header-inner">
-        {marquee ? (
-          <div className="page-marquee" aria-hidden="true">
-            {Array.from({ length: 16 }).map((_, i) => (
-              <span key={i}>{title}</span>
-            ))}
-          </div>
-        ) : (
-          <h1 className="page-title">{title}</h1>
-        )}
-        {headerExtra}
-      </div>
-    </header>
+        <div className={`page-header-inner ${centered ? 'page-header-centered' : ''}`}>
+          {marquee ? (
+            <div className="page-marquee" aria-hidden="true">
+              {Array.from({ length: 16 }).map((_, i) => (
+                <span key={i}>{title}</span>
+              ))}
+            </div>
+          ) : (
+            <h1 className="page-title" data-text={title}>{title}</h1>
+          )}
+          {headerExtra}
+        </div>
+      </header>
+
       {children}
     </section>
   )

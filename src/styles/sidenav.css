@@ -113,3 +113,13 @@
 
 /* Desktop: si querés mantener sidebar en escritorio, no; tu pedido fue hamburguesa siempre.
    Si querés que sea sidebar en desktop, te lo hago después. */
+.navdrawer-brand{
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.navdrawer-brand:hover{
+  opacity: .8;
+}

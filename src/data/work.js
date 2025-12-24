@@ -1,18 +1,25 @@
+import ventasGif from './imagenes/ventas.gif'
+import freelanceGif from './imagenes/freelance.gif'
+
 export const work = [
   {
-    org: 'Oscar Ortiz Dev Studio™',
-    role: 'Full‑Stack / Data & Automation',
-    period: "2024 - Presente",
+    title: 'Oscar Ortiz Dev Studio™',
+    client: 'Proyecto propio',
+    year: '2024–Presente',
+    image: ventasGif,
+    href: '/projects/devstudio',
     desc:
-      'E‑commerce + POS con reportes Excel/PDF, caja diaria, comisiones por método, migraciones automáticas, y foco en integridad de datos.',
-    stack: ['React', 'Node.js', 'Express', 'SQLite/Postgres', 'Prisma', 'ExcelJS', 'PDF'],
+      'E-commerce + POS con reportes Excel/PDF, caja diaria y automatización.',
+    stack: ['React', 'Node.js', 'Prisma'],
   },
   {
-    org: 'Proyectos freelance / consultoría',
-    role: 'Senior Developer',
-    period: '2022 - 2024',
+    title: 'Freelance & Consulting',
+    client: 'Varios clientes',
+    year: '2022–2024',
+    image: freelanceGif,
+    href: '/projects/freelance',
     desc:
-      'Sitios, apps y automatizaciones. Entregables claros, performance, errores bajo control, y mantenimiento real.',
-    stack: ['React', 'API Design', 'Auth', 'Deploy', 'Observabilidad'],
+      'Apps, sitios y automatizaciones con foco en performance y mantenimiento.',
+    stack: ['React', 'API Design', 'Deploy'],
   },
 ]

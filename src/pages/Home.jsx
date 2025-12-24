@@ -150,7 +150,30 @@ if (anchor) {
           </div>
         </div>
 
-        <div className="home-brand">{profile.home.brandTop}</div>
+        <Link
+  to="/"
+  className="home-brand home-brand-link"
+  onMouseEnter={() => {
+    if (isTransitioning) return
+    setHover({ label: String(profile.home.brandTop ?? '') })
+  }}
+  onMouseLeave={() => {
+    if (isTransitioning) return
+    setHover(null)
+  }}
+  onClick={(e) => {
+    e.preventDefault()
+    if (isTransitioning) return
+
+    runRouteTransition({
+      path: '/',
+      label: String(profile.home.brandTop ?? 'HOME')
+    })
+  }}
+>
+  {profile.home.brandTop}
+</Link>
+
 
         <div className="home-folio">
           <div>{profile.home.folioTop}</div>
@@ -164,7 +187,6 @@ if (anchor) {
       <section className="home-center">
         {/* hover background band + huge title */}
         <div className={`home-overlay ${overlayOn ? 'on' : ''} ${isTransitioning ? 'full' : ''}`} />
-
         <div className={`home-overlay-text ${overlayOn ? 'on' : ''}`} aria-label={overlayLabel}>
           {String(overlayLabel)
             .split('')
@@ -189,10 +211,10 @@ if (anchor) {
               onMouseEnter={() => !isTransitioning && setHover(item)}
               onMouseLeave={() => !isTransitioning && setHover(null)}
               onClick={(e) => {
-  e.preventDefault()
-  if (isTransitioning) return
-  runRouteTransition(item)
-}}
+              e.preventDefault()
+              if (isTransitioning) return
+              runRouteTransition(item)
+            }}
 
             >
               <div className="home-menu-item">

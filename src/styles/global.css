@@ -1,5 +1,32 @@
-:root{ color-scheme: dark; }
-body{ background:#0b0b0c; color:#eaeaea; }
+:root{ color-scheme: dark; 
+
+  --font-sans: 'Aboreto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;  
+  --font-sans2: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-unbounded: "Unbounded", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --text-base: 16px;
+  --lh-body: 1.6;
+  --lh-tight: 1.12;
+  --ls-tight: -0.02em;
+  --ls-wide: 0.28em;
+
+}
+
+html{ font-size: var(--text-base); }
+
+body{ 
+  background:#0b0b0c; 
+  color:#eaeaea;
+  font-family: var(--font-sans);
+  line-height: var(--lh-body);
+  line-height: 1.5;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin:0;
+  padding:0;
+}
 a{ color: inherit; }
 .app-shell{
   position: relative;
@@ -16,7 +43,7 @@ a{ color: inherit; }
 
 .page{ padding-top: 6px; }
 .page-title{ font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing:-0.02em; margin:0; }
-.page-header{ margin-bottom: 10px; }
+.page-header{ margin-bottom: 10px; overflow: hidden; }
 .page-marquee{
   font-size: clamp(1.8rem, 5vw, 3.4rem);
   letter-spacing:-0.02em;
@@ -28,7 +55,7 @@ a{ color: inherit; }
 .page-marquee span{ margin-right: 22px; opacity: .25; }
 .lead{ max-width: 62ch; }
 .grid-two{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.card-dark{ background:#111114; color:#eaeaea; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.card-dark{ background:#111114; color:#eaeaea; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.25); width: 100%; }
 .form-dark{ background:#09090a !important; color:#eaeaea !important; border: 1px solid rgba(255,255,255,.14) !important; }
 .form-dark::placeholder{ color: rgba(234,234,234,.55) !important; }
 
@@ -66,10 +93,140 @@ body.home-light .app-main{ max-width:none; padding:0; }
 body.about-full .app-main{
   padding: 0;
 }
+/* About: header fijo */
+/* About: header siempre visible */
+body.about-full .page-header{
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  background: #0b0b0c;
+}
+
+/* inner centrado */
 body.about-full .page-header-inner{
   display: flex;
   width: 75%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 16px 32px;
+}
+code, pre, .mono{
+  font-family: var(--font-mono);
+}
+pre{
+  background: #121214;
+  padding: 16px;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+pre code{
+  background: none;
+  padding: 0;
+}
+code{ background: #121214; padding: 2px 6px; border-radius: 6px; font-size: 90%; }
+blockquote{
+  border-left: 4px solid rgba(255,255,255,.12);
+  padding-left: 12px;
+  color: rgba(234,234,234,.75);
+  margin: 16px 0;
+}
+
+/* ==============================
+   Page title – horizontal fade trail
+============================== */
+
+.page-title{
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  white-space: nowrap;
+  display: inline-block;
+  width: fit-content;
+  
+}
+
+/* Repetición hacia la derecha */
+.page-title::before{
+  content:
+    attr(data-text) "    "
+    attr(data-text) "    "
+    attr(data-text) "    "
+    attr(data-text) "    "
+    attr(data-text) "    "
+    attr(data-text) "    "
+    attr(data-text);
+
+  position: absolute;
+  top: 0;
+  left: calc(100% + 16px); /* ajustá el espacio si querés */ 
+                /* empieza pegado al final del título */
+  /* si querés 8px de aire: left: calc(100% + 8px); */
+
+  z-index: -1;
+  white-space: nowrap;
+
+  letter-spacing: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+
+  /* CONTRASTE: tiene que ser claro */
+  color: rgba(234,234,234,.14);
+
+  /* fade horizontal más visible */
+  mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,.9) 0%,
+    rgba(0,0,0,.65) 25%,
+    rgba(0,0,0,.35) 55%,
+    rgba(0,0,0,.15) 75%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+/* Brillo suave en la primera copia */
+.page-title::after{
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: calc(100% + 16px); /* ajustá el espacio si querés */
+  z-index: -2;
+  color: transparent;
+  background: linear-gradient(
+  to right,
+  rgba(234,234,234,.4),
+  rgba(234,234,234,.18),
+  rgba(234,234,234,.05),
+  rgba(234,234,234,0)
+);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,1),
+    rgba(0,0,0,.6),
+    rgba(0,0,0,0)
+  );
+}
+
+/* Layout estándar para headers tipo About */
+.page-header-centered{
+  display: flex;
+  width: 75%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 32px;
+}
+/* mismo ancho que page-header-centered, pero para el body */
+.page-body-centered{
+  width: 75%;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 32px;
 }
+
+.work-lead{
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
