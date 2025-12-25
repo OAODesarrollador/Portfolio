@@ -104,6 +104,17 @@ body.home-light a { color: inherit; }
   color: rgba(0,0,0,.55); /* default (light bg) */
   transition: color 160ms ease, opacity 160ms ease;
 }
+/* Si algún link está hover, bajar visibilidad de los otros */
+.home-menu:has(a:hover) .home-menu-item{
+  opacity: 0.22;
+}
+
+/* El hover se mantiene visible */
+.home-menu:has(a:hover) a:hover .home-menu-item{
+  opacity: 1;
+}
+
+
 .home-menu-item strong{
   font-weight: 600;
   opacity: 1;

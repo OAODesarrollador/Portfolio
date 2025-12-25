@@ -7,9 +7,11 @@ import '../styles/sidenav.css'
 export default function SideNav() {
   const navItems = useMemo(() => routes.filter((r) => r.nav), [])
   const { pathname } = useLocation()
+  
   const [open, setOpen] = useState(false)
   const panelRef = useRef(null)
-
+  
+  
   // cerrar al cambiar de ruta
   useEffect(() => {
     setOpen(false)
@@ -24,6 +26,7 @@ export default function SideNav() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  
   return (
     <>
       {/* Botón hamburguesa fijo */}
