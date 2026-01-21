@@ -1,0 +1,45 @@
+.page-contact .contact-body {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-brand-inline {
+  position: fixed;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 0.8;
+
+  z-index: 999;
+  pointer-events: auto;
+}
+
+.contact-brand-inline:hover {
+  opacity: 0.95;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+@media (max-width: 768px) {
+  .page-contact .contact-body {
+    width: calc(100% - 32px);
+  }
+
+  .contact-brand-inline {
+    right: 16px;
+    top: 16px;
+    transform: none;
+    writing-mode: horizontal-tb;
+    letter-spacing: 0.12em;
+  }
+}

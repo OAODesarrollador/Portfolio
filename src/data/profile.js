@@ -31,7 +31,7 @@ export const profile = {
 
   about: {
     headline:
-      'Full-Stack orientado a Data Science. Construyo e-commerce/POS y sistemas de gestión con datos confiables, exportes (Excel/PDF), métricas y automatización. Mi objetivo es que la tecnología trabaje para vos, no al revés.',
+      'Full-Stack orientado a Data Science. Construyo e-commerce/POS y sistemas de gestión con datos confiables, exportes (Excel/PDF), métricas y automatización. Mi objetivo es que la tecnología potencie el negocio, no al revés.',
     bullets: [
       'Front: React · Router · Bootstrap (UI clara, rápida y usable)',
       'Back: Node/Express · Prisma · SQL (PostgreSQL/SQLite) · APIs robustas',
@@ -44,7 +44,7 @@ export const profile = {
       'Full-Stack + Data Science (real, no buzzwords)',
       'Fanático de la trazabilidad y la consistencia de datos',
       'Automatización y DX: scripts, migraciones, validaciones',
-      'Three.js/WebGL cuando suma valor (no por humo)',
+      'Three.js/WebGL cuando suma valor (enfocado en experiencia real)',
     ],
 
     // NUEVO: “cómo trabajo” (a)(b)(c)(d)
@@ -65,7 +65,7 @@ export const profile = {
         key: '(c)',
         title: 'Implementación',
         text:
-          'Backend robusto (Node/Express + Prisma/SQL), validaciones, migraciones automáticas y manejo de errores. Evito “romper producción” por cambios chicos.',
+          'Backend robusto (Node/Express + Prisma/SQL), Clean Code, validaciones y migraciones automáticas. Priorizo la estabilidad y evito deuda técnica innecesaria.',
       },
       {
         key: '(d)',
