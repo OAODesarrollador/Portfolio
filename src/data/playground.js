@@ -4,7 +4,7 @@ export const playground = [
     desc: 'Experiencia inmersiva con Three.js, React y TypeScript. Modelos 3D interactivos y optimización de performance.',
     tech: 'React · TypeScript · Three.js · GSAP',
     live: null,
-    github: 'https://github.com/OAODesarrollador/Portfolio3d',
+    github: 'https://github.com/OAODesarrollador/Portfolio',
     image: 'https://placehold.co/600x400/1a1a1a/eaeaea?text=Portfolio+3D',
   },
   {
@@ -39,6 +39,12 @@ export const playground = [
     github: 'https://github.com/OAODesarrollador/PracticaConSvelte',
     image: 'https://placehold.co/600x400/1a1a1a/eaeaea?text=Svelte+Todo',
   },
-  
+  {
+    title: 'Portfolio Salesforce',
+    desc: 'Portafolio desarrollado en Experience Cloud usando Lightning Web Components (LWC). Uso de comunicación entre componentes y diseño personalizado.',
+    tech: 'Salesforce · LWC · JavaScript · Experience Cloud',
+    live: 'https://oaodeveloper-dev-ed.develop.my.site.com/portfolio/s/?language=es',
+    github: 'https://github.com/OAODesarrollador/PortfolioSalesforce',
+    image: 'https://placehold.co/600x400/1a1a1a/eaeaea?text=Salesforce+LWC',
+  },
 ]
-
