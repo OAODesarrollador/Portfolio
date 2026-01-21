@@ -19,6 +19,27 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
+    const updateOverlayCenter = () => {
+      window.requestAnimationFrame(() => {
+        const menu = document.querySelector('.home-menu')
+        if (!menu) return
+        const r = menu.getBoundingClientRect()
+        const centerY = r.top + r.height / 2
+        const band = Math.max(80, r.height * 1.4)
+        const bandOn = Math.max(140, r.height * 2.2)
+
+        document.documentElement.style.setProperty('--home-menu-center', `${centerY}px`)
+        document.documentElement.style.setProperty('--home-menu-band', `${band}px`)
+        document.documentElement.style.setProperty('--home-menu-band-on', `${bandOn}px`)
+      })
+    }
+
+    updateOverlayCenter()
+    window.addEventListener('resize', updateOverlayCenter)
+    return () => window.removeEventListener('resize', updateOverlayCenter)
+  }, [])
+
+  useEffect(() => {
     const onMove = (e) => {
       const x = (e.clientX / window.innerWidth) * 2 - 1 // [-1,1]
       mouseX.current = x
