@@ -3,7 +3,7 @@ export const playground = [
     title: 'Portfolio 3D',
     desc: 'Experiencia inmersiva con Three.js, React y TypeScript. Modelos 3D interactivos y optimización de performance.',
     tech: 'React · TypeScript · Three.js · GSAP',
-    live: null,
+    live: 'https://portfolio-oaodevstudio.vercel.app',
     github: 'https://github.com/OAODesarrollador/Portfolio',
     image: 'https://placehold.co/600x400/1a1a1a/eaeaea?text=Portfolio+3D',
   },
