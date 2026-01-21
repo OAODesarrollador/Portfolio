@@ -81,7 +81,7 @@ export default function Hero3D({ modelUrl = '', mouseX }) {
         <ambientLight intensity={0.1} />
         <directionalLight position={[3, 4, 2]} intensity={1.2} />
         <ParallaxRig mouseX={mouseX}>
-          <group scale={0.85} position={[0, -0.6, 0]} rotation={[0, 0, 0]}>
+          <group scale={0.85} position={[0, -1.52, 0]} rotation={[0, 0, 0]}>
             <ModelErrorBoundary fallback={<FallbackModel />}>
               <ModelSwitch url={modelUrl} />
             </ModelErrorBoundary>

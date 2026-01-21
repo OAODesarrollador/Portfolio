@@ -26,7 +26,7 @@ export const profile = {
     folioYear: "'25",
     bigWord: 'Hola !',
     roleLine: 'Oscar Alejandro Ortiz, Full‑Stack Developer orientado a Data Science.',
-    modelUrl: '/models/robotAnuncio2.glb',
+    modelUrl: '/models/mini_bot.glb',
   },
 
   about: {
