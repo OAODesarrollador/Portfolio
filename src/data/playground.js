@@ -1,23 +1,44 @@
 export const playground = [
   {
-    title: 'TiendaSaludable POS',
-    desc: 'Caja diaria + reportes + export Excel/PDF + comisiones por método.',
-    tech: 'React · Node · SQLite/Prisma · ExcelJS',
-    live: null,
-    github: 'https://github.com/OAODesarrollador',
-  },
-  {
     title: 'Portfolio 3D',
-    desc: 'Experimentos 3D y motion con enfoque en performance.',
-    tech: 'Three.js · GSAP · WebGL',
+    desc: 'Experiencia inmersiva con Three.js, React y TypeScript. Modelos 3D interactivos y optimización de performance.',
+    tech: 'React · TypeScript · Three.js · GSAP',
     live: null,
-    github: 'https://github.com/OAODesarrollador',
+    github: 'https://github.com/OAODesarrollador/Portfolio3d',
+    image: 'https://placehold.co/600x400/1a1a1a/eaeaea?text=Portfolio+3D',
   },
   {
-    title: 'Dashboards de datos',
-    desc: 'KPIs, segmentación, análisis y visualizaciones orientadas a decisión.',
-    tech: 'Python · Pandas · Matplotlib · SQL',
+    title: 'FullStack Pizzeria',
+    desc: 'Sistema completo de pedidos: registro, carrito, seguimiento de entregas y panel administrativo.',
+    tech: 'TypeScript · Node.js · React · SQL',
     live: null,
-    github: null,
+    github: 'https://github.com/OAODesarrollador/FullStackPizzeria',
+    image: 'https://placehold.co/600x400/1a1a1a/eaeaea?text=Pizzeria+App',
   },
+  {
+    title: 'Node JWT API',
+    desc: 'API REST segura con autenticación JWT, manejo de roles y estructura escalable con TypeScript.',
+    tech: 'Node.js · Express · JWT · TypeScript',
+    live: null,
+    github: 'https://github.com/OAODesarrollador/Node-JWT-ApiRest-Typescript',
+    image: 'https://placehold.co/600x400/1a1a1a/eaeaea?text=Node+API',
+  },
+  {
+    title: 'Tienda Saludable',
+    desc: 'Gestión de inventario y ventas para productos naturales. Reportes y exportación de datos.',
+    tech: 'JavaScript · Node.js · SQLite',
+    live: null,
+    github: 'https://github.com/OAODesarrollador/TiendaSaludable',
+    image: 'https://placehold.co/600x400/1a1a1a/eaeaea?text=Tienda+Saludable',
+  },
+  {
+    title: 'Práctica Svelte',
+    desc: 'Exploración de reactividad y estado con Svelte. Lista de tareas rápida y ligera.',
+    tech: 'Svelte · JavaScript · CSS',
+    live: null,
+    github: 'https://github.com/OAODesarrollador/PracticaConSvelte',
+    image: 'https://placehold.co/600x400/1a1a1a/eaeaea?text=Svelte+Todo',
+  },
+  
 ]
+
