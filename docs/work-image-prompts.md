@@ -1,0 +1,22 @@
+# Gráficos de WORK
+
+Generados con la herramienta integrada image_gen. Reconstrucciones ilustrativas basadas en las funciones documentadas en src/data/work.js; no son capturas de los sistemas originales.
+
+## tienda-saludable
+
+Archivo: public/images/projects/tienda-saludable-generated.png
+
+Use case: product-mockup. Create a polished landscape 16:10 portfolio project cover image, high resolution, photorealistic staged hardware with carefully designed legible Spanish interfaces, matching an editorial developer portfolio. Main title verbatim "Tienda Saludable" in bold typography in upper left with generous margins. Contemporary health food store. Foreground desktop POS with product catalog (granola, nuts, seeds), cart and checkout; adjacent phone showing online shop catalog and cart. Desktop sidebar labels Ventas, Stock, Caja, Reportes. Small supporting panels for Cierre de caja and Exportar reporte. Products physically on counter. Green sage, warm cream, charcoal colors. Real functions: ecommerce, POS, inventory, cash closing, exportable reports. No delivery tracking or AI features. Composition must communicate the real workflow, with dominant foreground equipment and supporting business context, premium lighting and coherent perspective. This is an illustrative reconstruction, not a screenshot. Small discreet caption "Visualización del proyecto". Keep all important content in central 85% to withstand cropping. Avoid unsupported functions, exaggerated claims, random filler text, watermarks. Generate one image.
+
+## migracion-sistema
+
+Archivo: public/images/projects/migracion-sistema-generated.png
+
+Use case: product-mockup. Create a polished landscape 16:10 portfolio project cover image, high resolution, photorealistic staged hardware with carefully designed legible Spanish interfaces, matching an editorial developer portfolio. Main title verbatim "Migración de Sistema" in bold typography in upper left with generous margins. Data recovery consultancy project, elegant editorial technical visualization on a real workstation. Main large monitor showing clearly connected three stages Recuperación → Limpieza → Validación, with source tabular records, cleaned table, check marks and target database. Small secondary old computer or archived disk at left, modern operational workstation at right, subtle visual connection representing transfer. Slate, amber and teal. Real scope: recover data from abandoned system, transform, validate integrity, preserve business continuity. No invented metrics, no AI, no cybersecurity hacker imagery, no cloud vendor brands. Composition must communicate the real workflow, with dominant foreground equipment and supporting business context, premium lighting and coherent perspective. This is an illustrative reconstruction, not a screenshot. Small discreet caption "Visualización del proyecto". Keep all important content in central 85% to withstand cropping. Avoid unsupported functions, exaggerated claims, random filler text, watermarks. Generate one image.
+
+## digitalizacion-pos
+
+Archivo: public/images/projects/digitalizacion-pos-generated.png
+
+Use case: product-mockup. Create a polished landscape 16:10 portfolio project cover image, high resolution, photorealistic staged hardware with carefully designed legible Spanish interfaces, matching an editorial developer portfolio. Main title verbatim "Digitalización POS" in bold typography in upper left with generous margins. Historically grounded 1996–1999 supermarket digitization project. Beige CRT checkout computer with simple period-correct product table columns Código, Producto, Precio; wired barcode scanner scanning a grocery item, printed shelf price labels with barcodes. Background small tasteful diagram connecting two branch store icons labeled Sucursales to central beige server labeled Servidor central. Retail checkout setting, cream, navy, muted red. Scope: barcode to product/price mapping, shelf labeling, centralized branch data, Windows NT era local networks. No modern laptops, smartphones, touchscreens, cloud, analytics dashboards or invented modern features. Composition must communicate the real workflow, with dominant foreground equipment and supporting business context, premium lighting and coherent perspective. This is an illustrative reconstruction, not a screenshot. Small discreet caption "Visualización del proyecto". Keep all important content in central 85% to withstand cropping. Avoid unsupported functions, exaggerated claims, random filler text, watermarks. Generate one image.
+
