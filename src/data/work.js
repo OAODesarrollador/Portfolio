@@ -1,222 +1,128 @@
-import tiendaGif from './imagenes/PosTiendaSaludable.gif'
-import freelanceGif from './imagenes/freelance.gif'
 import aybarGif from './imagenes/PosVenta.gif'
-import roigGif from './imagenes/ContableRoig.gif'
 import migrationGif from './imagenes/MigracionDatos.gif'
-import tiendaSaludableGif from './imagenes/PosTiendaSaludable.gif'
+import tiendaGif from './imagenes/PosTiendaSaludable.gif'
 
 export const work = [
   {
-    title: 'Oscar Ortiz Dev Studio™',
-    client: 'Proyecto propio',
-    year: '2024–Presente',
-    image: tiendaSaludableGif,
-    href: '/projects/devstudio',
-    desc: 'E-commerce + POS con reportes Excel/PDF, caja diaria y automatización.',
+    slug: 'dibok', title: 'Dibok',
+    subtitle: 'SaaS de reservas y operación para negocios de servicios.',
+    client: 'Producto propio', year: 'SaaS activo',
+    role: ['Dirección de producto', 'Desarrollo Full Stack', 'Arquitectura SaaS'],
+    image: '/images/projects/dibok-generated.png',
+    description: 'Una plataforma vertical que conecta agenda, clientes, cobros y captación de nuevos turnos en un solo sistema.',
+    problem: 'Las barberías administran horarios por múltiples canales, sufren cruces de turnos, disponibilidad confusa y ausencias que afectan sus ingresos.',
+    solution: 'Diseñé una experiencia de reserva disponible las 24 horas, con servicios, profesionales, horarios reales, pagos y una página propia para cada negocio.',
+    development: 'El producto está pensado como un ecosistema multi-negocio: centraliza la operación diaria y crea una vía de adquisición para clientes que todavía no conocen el comercio.',
+    stack: ['SaaS', 'Reservas', 'Pagos', 'Multi-negocio'],
+    liveUrl: 'https://dibok.app/', featured: 'SaaS vertical escalable',
+  },
+  {
+    slug: 'padel-club', title: 'Padel Club',
+    subtitle: 'Reservas de canchas, pagos y administración multi-club.',
+    client: 'Producto propio', year: '2026',
+    role: ['Dirección de producto', 'Desarrollo Full Stack', 'Arquitectura'],
+    image: '/images/projects/padel-generated.png',
+    description: 'Un sistema comercializable para clubes que integra la reserva pública con administración, pagos y control operativo.',
+    problem: 'Una agenda deportiva debe evitar solapamientos, sostener múltiples formas de pago y aislar correctamente la información de cada club.',
+    solution: 'Implementé reservas con retención temporal y control de concurrencia, gestión multi-club, roles de personal, reglas de precios y cuatro métodos de pago.',
+    development: 'Construido con Next.js y Turso/libSQL, incorpora JWT en cookies httpOnly, webhooks de Mercado Pago con firma e idempotencia, auditoría y pruebas de seguridad y aislamiento.',
+    stack: ['Next.js', 'Turso', 'Mercado Pago', 'JWT', 'Webhooks'],
+    liveUrl: 'https://padel-club-three.vercel.app',
+    repositoryUrl: 'https://github.com/OAODesarrollador/Padel_Club',
+    featured: 'SaaS multi-club y pagos',
+  },
+  {
+    slug: 'central-donuts', title: 'Central Donuts',
+    subtitle: 'Comercio boutique mobile-first con identidad visual propia.',
+    client: 'Concepto comercial', year: '2026',
+    role: ['Dirección UX/UI', 'Desarrollo Full Stack', 'Diseño de producto'],
+    image: '/images/projects/donnas-generated.png',
+    description: 'Una experiencia de comercio electrónico que une catálogo, carrito y compra con una identidad editorial diseñada para una marca gastronómica.',
+    problem: 'El tráfico proveniente de redes sociales necesita comprender el producto y completar un pedido rápidamente dentro de navegadores móviles limitados.',
+    solution: 'Diseñé una interfaz mobile-first con filtros, carrito adaptativo, compra en pasos y continuidad hacia WhatsApp, priorizando ergonomía y conversión.',
+    development: 'Next.js y TypeScript sostienen la aplicación; PostgreSQL y Prisma modelan el catálogo. Las interacciones usan Framer Motion y el carrito conserva su estado localmente.',
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Framer Motion'],
+    liveUrl: 'https://donnas.vercel.app',
+    repositoryUrl: 'https://github.com/OAODesarrollador/Donnas',
+    featured: 'Comercio y dirección visual',
+  },
+  {
+    slug: 'tienda-saludable',
+    title: 'Tienda Saludable',
+    subtitle: 'Comercio electrónico y POS para la operación real.',
+    client: 'Proyecto propio', year: '2024—Presente',
+    role: ['Desarrollo Full Stack', 'Desarrollo de producto', 'Arquitectura'],
+    image: tiendaGif,
+    description: 'Un producto integral que conecta ventas, stock, caja, cierres y reportes en una única operación.',
+    problem: 'Los procesos manuales fragmentaban la información, aumentaban el riesgo de error y dificultaban la trazabilidad diaria.',
+    solution: 'Diseñé un flujo conectado entre catálogo, carrito, compra, POS y backend, con controles de caja y reportes exportables.',
+    development: 'El modelo de datos evoluciona mediante migraciones incrementales. La consistencia, las validaciones y la continuidad operativa tienen prioridad.',
     stack: ['React', 'Node.js', 'Prisma'],
-
-    modal: {
-      tagline:
-        'Sistema completo E-commerce + POS pensado para operación real (caja, cierres, reportes y automatización).',
-      sections: [
-          {
-            title: 'Contexto',
-            bullets: [
-              'Necesidad de centralizar ventas, stock y caja en un único sistema.',
-              'Procesos manuales propensos a errores y sin trazabilidad.',
-              'Reportes operativos necesarios para control diario y decisiones.',
-            ],
-          },
-          {
-            title: 'Qué construí',
-            bullets: [
-              'Flujo completo de venta: catálogo → carrito → checkout → registro en backend.',
-              'POS con medios de pago/comisiones, trazabilidad y cierres.',
-              'Reportes exportables (Excel/PDF) para control y auditoría.',
-              'Evolución del modelo de datos con migraciones incrementales.',
-            ],
-          },
-          {
-            title: 'Decisiones técnicas clave',
-            bullets: [
-              'Diseño orientado a operación real (caja diaria, cierres, auditoría).',
-              'Migraciones incrementales para evolucionar sin romper datos existentes.',
-              'Integridad/consistencia de datos como prioridad sobre features demo.',
-            ],
-          },
-          {
-            title: 'Impacto',
-            bullets: [
-              'Mejoró control y trazabilidad del negocio.',
-              'Redujo errores manuales en caja y control de precios/stock.',
-              'Aumentó disponibilidad de información para gestión.',
-            ],
-          },
-          {
-            title: 'Por qué importa',
-            bullets: [
-              'Prioriza operatividad: caja diaria, cierres, reportes y control.',
-              'Arquitectura iterativa: crece sin romper lo existente.',
-            ],
-          },
-        ],
-
-      ctas: [
-        { label: 'Repositorio TiendaSaludable', url: 'https://github.com/OAODesarrollador/TiendaSaludable' },
-      ],
-    },
-  },
-
-  {
-    title: 'Freelance & Consulting',
-    client: 'Varios clientes',
-    year: '2022–2024',
-    image: freelanceGif,
-    href: '/projects/freelance',
-    desc: 'Apps, sitios y automatizaciones con foco en performance y mantenimiento.',
-    stack: ['React', 'API Design', 'Deploy'],
-
-    modal: {
-      tagline:
-        'Entrega clara, foco en resultados y comunicación directa con stakeholders.',
-      sections: [
-        {
-          title: 'Casos representativos',
-          bullets: [
-            'Apps y sitios con foco en mantenimiento y performance.',
-            'Automatizaciones/reporting para reducir trabajo manual.',
-            'Backends/APIs para gestión interna y flujos de negocio.',
-          ],
-        },
-        {
-          title: 'Impacto',
-          bullets: [
-            'Entrega end-to-end con comunicación directa con stakeholders.',
-            'Mejora continua: iteración, validación y cierre de entregables.',
-          ],
-        },
-
-      ],
-      ctas: [
-        //{ label: 'Ver CV', url: '/cv' }, // si tenés ruta; si no, borrá esto
-      ],
-    },
+    repositoryUrl: 'https://github.com/OAODesarrollador/TiendaSaludable',
+    featured: 'Producto operativo',
   },
   {
-  title: 'Migración de Sistema Abandonado',
-  client: 'Consultoría',
-  year: 'Proyecto puntual',
-  image: migrationGif,
-  href: '/projects/migration', // si no existe la ruta, dejalo pero el click abre modal igual
-  desc: 'Recuperación, limpieza y migración de datos para continuidad operativa.',
-  stack: ['Data Migration', 'SQL', 'QA', 'Procesos'],
-
-  modal: {
-    tagline: 'Migración minuciosa de datos desde un sistema abandonado, evitando pérdida de información crítica.',
-    sections: [
-      {
-        title: 'Contexto',
-        bullets: [
-          'Proveedor anterior abandonó el sistema.',
-          'Riesgo de pérdida de datos y freno operativo del negocio.',
-        ],
-      },
-      {
-        title: 'Qué hice',
-        bullets: [
-          'Recuperación y limpieza de datos.',
-          'Adaptación al nuevo entorno operativo.',
-          'Validaciones para asegurar consistencia.',
-        ],
-      },
-      {
-        title: 'Decisiones técnicas clave',
-        bullets: [
-          'Prioridad: integridad de datos antes que velocidad.',
-          'Estrategia de validación y control de calidad (QA) para evitar corrupción.',
-        ],
-      },
-      {
-        title: 'Impacto',
-        bullets: [
-          'Continuidad operativa sin pérdida de información crítica.',
-          'Datos más consistentes para operar y reportar.',
-        ],
-      },
-    ],
-    ctas: [],
+    slug: 'fullstack-pizzeria',
+    title: 'Pizzería Full Stack',
+    subtitle: 'Pedidos, roles y seguimiento de entregas de punta a punta.',
+    client: 'Proyecto propio', year: 'En desarrollo',
+    role: ['Desarrollo Full Stack', 'Diseño de flujos', 'Despliegue'],
+    image: '/images/projects/pizzeria-generated.png',
+    description: 'Una plataforma de comercio y gestión que coordina la experiencia del cliente con la operación interna y la entrega.',
+    problem: 'El negocio necesita recibir pedidos digitales y, al mismo tiempo, dar a supervisores y repartidores una vista clara del estado de cada entrega.',
+    solution: 'Construí un flujo con catálogo, detalle de productos y carrito para clientes, junto con roles internos para asignar repartidores y actualizar estados.',
+    development: 'La solución separa frontend y backend, utiliza PostgreSQL como persistencia y Prisma para el acceso a datos. El despliegue integra frontend estático, servicio web y base de datos.',
+    stack: ['TypeScript', 'React', 'Node.js', 'Express', 'PostgreSQL', 'Prisma'],
+    liveUrl: 'https://fullstackpizzeria-front.onrender.com/',
+    repositoryUrl: 'https://github.com/OAODesarrollador/FullStackPizzeria',
+    featured: 'Flujo multirol',
   },
-},
-
   {
-  title: 'Digitalización Contable + Sistemas Relacionales',
-  client: 'Estudio Contable Roig & Asociados',
-  year: '1994–2000',
-  image: roigGif,
-  href: '/projects/accounting',
-  desc: 'Pasaje de procesos manuales a digitales (IVA, impuestos, sueldos) con DB relacional.',
-  stack: ['DB Relacional', 'Clarion', 'Procesos', 'Datos'],
-
-  modal: {
-    tagline: 'Digitalización de procesos contables con foco en consistencia de datos y ahorro operativo.',
-    sections: [
-      {
-        title: 'Qué digitalicé',
-        bullets: [
-          'Libros de IVA, liquidación de impuestos y sueldos.',
-          'Sistemas basados en bases de datos relacionales (Clarion).',
-          'Migración completa de procesos manuales a digitales.',
-        ],
-      },
-      {
-        title: 'Impacto',
-        bullets: [
-          'Ahorro significativo de tiempo operativo.',
-          'Mejora en consistencia de datos.',
-        ],
-      },
-    ],
-    ctas: [],
+    slug: 'portfolio-salesforce',
+    title: 'Portfolio Salesforce',
+    subtitle: 'Experiencia digital creada dentro del ecosistema Salesforce.',
+    client: 'Proyecto propio', year: 'Experience Cloud',
+    role: ['Desarrollo Salesforce', 'Frontend', 'Diseño de componentes'],
+    image: '/images/projects/salesforce-generated.png',
+    description: 'Un portfolio construido en Experience Cloud que demuestra desarrollo de interfaces y componentes dentro de una plataforma empresarial.',
+    problem: 'El desafío era crear una experiencia personal y visualmente propia respetando la arquitectura, los recursos y los patrones de Salesforce.',
+    solution: 'Desarrollé componentes personalizados, navegación, paneles y comunicación entre componentes para articular el contenido como una experiencia única.',
+    development: 'El proyecto combina Lightning Web Components, Visualforce, Aura, APEX, recursos estáticos y manejo del DOM, además de HTML, CSS y JavaScript.',
+    stack: ['Salesforce', 'LWC', 'APEX', 'Visualforce', 'Aura', 'JavaScript'],
+    liveUrl: 'https://oaodeveloper-dev-ed.develop.my.site.com/portfolio/s/?language=es',
+    repositoryUrl: 'https://github.com/OAODesarrollador/PortfolioSalesforce',
+    featured: 'Plataforma empresarial',
   },
-},
-{
-  title: 'Digitalización de POS (Retail)',
-  client: 'Supermercados Aybar S.A.',
-  year: '1996–1999',
-  image: aybarGif,
-  href: '/projects/pos',
-  desc: 'Migración de precios manuales a scanner + centralización de datos de sucursales.',
-  stack: ['POS', 'Datos', 'Redes', 'Windows Server/NT'],
-
-  modal: {
-    tagline: 'Digitalización de productos y precios para lectura por scanner y control centralizado.',
-    sections: [
-      {
-        title: 'Contexto',
-        bullets: [
-          'Precios manuales y alta tasa de error en caja.',
-          'Necesidad de centralizar datos entre sucursales.',
-        ],
-      },
-      {
-        title: 'Qué hice',
-        bullets: [
-          'Asociación código–producto–precio en cajas registradoras.',
-          'Software de etiquetado de góndola alineado al sistema de ventas.',
-          'Centralización de datos hacia servidor principal.',
-          'Configuración de redes Windows Server/NT.',
-        ],
-      },
-      {
-        title: 'Impacto',
-        bullets: [
-          'Reducción de errores y mejora del control de precios.',
-          'Mayor disponibilidad de información para gestión.',
-        ],
-      },
-    ],
-    ctas: [],
+  {
+    slug: 'migracion-sistema',
+    title: 'Migración de Sistema',
+    subtitle: 'Recuperación de datos para sostener una operación crítica.',
+    client: 'Consultoría', year: 'Proyecto puntual',
+    role: ['Migración de datos', 'Control de calidad'], image: migrationGif,
+    description: 'Recuperación, limpieza y migración de información desde un sistema abandonado hacia un nuevo entorno operativo.',
+    problem: 'La salida del proveedor anterior dejó al negocio expuesto a pérdida de datos y a una interrupción de sus procesos.',
+    solution: 'Recuperé, adapté y validé los datos con una estrategia centrada en integridad y control de calidad.',
+    development: 'Cada transformación fue comprobada antes de avanzar para minimizar inconsistencias y preservar la continuidad del negocio.',
+    stack: ['Migración de datos', 'SQL', 'Control de calidad', 'Procesos'],
+    featured: 'Continuidad operativa',
   },
-},
-
+  {
+    slug: 'digitalizacion-pos',
+    title: 'Digitalización POS',
+    subtitle: 'Precios, productos y sucursales conectados.',
+    client: 'Supermercados Aybar S.A.', year: '1996—1999',
+    role: ['Desarrollo de software', 'Infraestructura'], image: aybarGif,
+    description: 'Migración del manejo manual de precios hacia lectura por escáner y administración centralizada.',
+    problem: 'Los precios manuales producían errores en caja y las sucursales no compartían una fuente central de información.',
+    solution: 'Relacioné códigos, productos y precios, desarrollé etiquetado de góndola y centralicé los datos hacia el servidor principal.',
+    development: 'La implementación incluyó software operativo y configuración de redes Windows Server/NT para conectar las sucursales.',
+    stack: ['POS', 'Datos', 'Redes', 'Windows Server/NT'],
+    featured: 'Transformación operativa',
+  },
 ]
+
+export const getProject = (slug) => work.find((project) => project.slug === slug)
+export const getNextProject = (slug) => {
+  const index = work.findIndex((project) => project.slug === slug)
+  return work[(index + 1) % work.length]
+}

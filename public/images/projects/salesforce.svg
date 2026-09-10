@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Portfolio construido sobre Salesforce</title><desc id="desc">Composición visual inspirada en una interfaz de Experience Cloud con componentes conectados.</desc>
+  <rect width="1600" height="900" fill="#071f2b"/><circle cx="1280" cy="150" r="330" fill="#0aaee9" opacity=".18"/><circle cx="1420" cy="760" r="400" fill="#0aaee9" opacity=".1"/>
+  <text x="110" y="150" fill="#55c8ef" font-family="Arial" font-size="24" letter-spacing="5">EXPERIENCE CLOUD</text><text x="110" y="265" fill="#fff" font-family="Arial" font-weight="700" font-size="84">SALESFORCE</text>
+  <rect x="110" y="340" width="560" height="390" rx="8" fill="#0d3445" stroke="#1f6179"/><rect x="720" y="340" width="760" height="180" rx="8" fill="#0d3445" stroke="#1f6179"/><rect x="720" y="550" width="365" height="180" rx="8" fill="#0d3445" stroke="#1f6179"/><rect x="1115" y="550" width="365" height="180" rx="8" fill="#0d3445" stroke="#1f6179"/>
+  <g fill="#86ddfa" font-family="Arial" font-size="22"><text x="150" y="405">LWC</text><text x="760" y="405">APEX + VISUALFORCE</text><text x="760" y="615">AURA</text><text x="1155" y="615">COMPONENTES</text></g><path d="M210 500h360M210 550h290M210 600h330" stroke="#2a718b" stroke-width="18"/>
+</svg>

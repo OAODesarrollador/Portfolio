@@ -1,31 +1,7 @@
-import { Link } from 'react-router-dom'
-import Page from '../components/Page.jsx'
+import InternalLayout from '../components/InternalLayout.jsx'
 import PlaygroundItem from '../components/PlaygroundItem.jsx'
+import Reveal from '../components/Reveal.jsx'
 import { playground } from '../data/playground.js'
 import '../styles/playground.css'
 
-export default function Playground() {
-  return (
-    <>
-      <Link to="/" className="work-brand-inline">
-        ↑ OAO Dev Studio™  ↑
-      </Link>
-
-      <Page title="Playground" marquee>
-        <p className="opacity-75 mt-2 mb-4 text-center mx-auto" style={{ maxWidth: '600px' }}>
-          Experimentos de código, proyectos personales y prototipos.
-          <br />
-          <span className="small opacity-50">Lo que sucede en el playground, se queda en el playground.</span>
-        </p>
-
-        <div style={{ width: '80%', margin: '0 auto' }}>
-          <div className="playground-grid">
-            {playground.map((it, i) => (
-              <PlaygroundItem key={i} item={it} />
-            ))}
-          </div>
-        </div>
-      </Page>
-    </>
-  )
-}
+export default function Playground(){return <InternalLayout className="playground-page"><section className="internal-hero"><p className="eyebrow">03 — Laboratorio</p><h1>Experimentos,<br />código y curiosidad.</h1><p className="hero-note">Un espacio para prototipos, ideas y exploraciones técnicas fuera del trabajo comercial.</p></section><section className="playground-grid">{playground.map(item=><Reveal key={item.title}><PlaygroundItem item={item}/></Reveal>)}</section></InternalLayout>}
