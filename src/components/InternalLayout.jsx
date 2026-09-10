@@ -14,6 +14,11 @@ const links = [
 export default function InternalLayout({ children, className = '' }) {
   const { pathname } = useLocation()
 
+  const scrollToTop = () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })
+  }
+
   useEffect(() => {
     document.body.classList.add('internal-active')
     window.scrollTo({ top: 0, behavior: 'instant' })
@@ -41,6 +46,12 @@ export default function InternalLayout({ children, className = '' }) {
         </nav>
       </header>
       <div id="main-content">{children}</div>
+      <div className="back-to-top-wrap">
+        <button className="back-to-top" type="button" onClick={scrollToTop} aria-label="Volver al inicio de esta página">
+          <span>Volver arriba</span>
+          <span className="back-to-top-arrow" aria-hidden="true">↑</span>
+        </button>
+      </div>
       <footer className="internal-footer">
         <Link to="/">OAO Dev Studio™</Link>
         <span>{profile.location.city}, {profile.location.country}</span>

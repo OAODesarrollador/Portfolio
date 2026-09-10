@@ -126,3 +126,7 @@ export const getNextProject = (slug) => {
   const index = work.findIndex((project) => project.slug === slug)
   return work[(index + 1) % work.length]
 }
+export const getPreviousProject = (slug) => {
+  const index = work.findIndex((project) => project.slug === slug)
+  return work[(index - 1 + work.length) % work.length]
+}
