@@ -12,6 +12,59 @@ export default function Home() {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const transitionRef = useRef(null)
   const navItems = useMemo(() => routes.filter((r) => r.nav), [])
+  const helloRef = useRef(null)
+
+  useEffect(() => {
+    const title = helloRef.current
+    const letters = [...title.querySelectorAll('.hello-mask')]
+    const motion = window.matchMedia('(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)')
+    const readyAt = performance.now() + 660
+    let frame = 0
+    let pointerX = 0
+    let pointerY = 0
+    const reset = () => {
+      cancelAnimationFrame(frame)
+      frame = 0
+      letters.forEach(letter => letter.style.setProperty('--hello-scale', '1'))
+    }
+    const update = () => {
+      frame = 0
+      if (performance.now() < readyAt) return
+      const radius = parseFloat(getComputedStyle(title).fontSize) * 1.25
+      letters.forEach(letter => {
+        const bounds = letter.getBoundingClientRect()
+        const distance = Math.hypot(pointerX - bounds.left - bounds.width / 2, pointerY - bounds.top - bounds.height / 2)
+        const proximity = Math.max(0, 1 - distance / radius)
+        const influence = proximity * proximity * (3 - 2 * proximity)
+        letter.style.setProperty('--hello-scale', String(1 + 0.06 * influence))
+      })
+    }
+    const move = event => {
+      if (event.pointerType !== 'mouse') return
+      pointerX = event.clientX
+      pointerY = event.clientY
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    const detach = () => {
+      title.removeEventListener('pointermove', move)
+      title.removeEventListener('pointerleave', reset)
+      window.removeEventListener('blur', reset)
+      reset()
+    }
+    const sync = () => {
+      detach()
+      if (!motion.matches) return
+      title.addEventListener('pointermove', move, { passive: true })
+      title.addEventListener('pointerleave', reset)
+      window.addEventListener('blur', reset)
+    }
+    sync()
+    motion.addEventListener('change', sync)
+    return () => {
+      detach()
+      motion.removeEventListener('change', sync)
+    }
+  }, [])
 
   useEffect(() => {
     document.body.classList.add('home-light')
@@ -40,12 +93,32 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
+    const pointer = window.matchMedia('(hover: hover) and (pointer: fine)')
+    let idleTimer
+    const neutral = () => {
+      window.clearTimeout(idleTimer)
+      mouseX.current = 0
+    }
     const onMove = (e) => {
+      if (!pointer.matches) return
       const x = (e.clientX / window.innerWidth) * 2 - 1 // [-1,1]
       mouseX.current = x
+      window.clearTimeout(idleTimer)
+      idleTimer = window.setTimeout(neutral, 1200)
     }
     window.addEventListener('mousemove', onMove, { passive: true })
-    return () => window.removeEventListener('mousemove', onMove)
+    window.addEventListener('blur', neutral)
+    document.documentElement.addEventListener('mouseleave', neutral)
+    document.addEventListener('visibilitychange', neutral)
+    pointer.addEventListener('change', neutral)
+    return () => {
+      neutral()
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('blur', neutral)
+      document.documentElement.removeEventListener('mouseleave', neutral)
+      document.removeEventListener('visibilitychange', neutral)
+      pointer.removeEventListener('change', neutral)
+    }
   }, [])
 
   const overlayLabel = hover?.label ?? ''
@@ -200,8 +273,12 @@ if (anchor) {
           <div>{profile.home.folioTop}</div>
         </div>
 
-        <div className="home-bigword">
-          {profile.home.bigWord}
+        <div className="home-bigword" ref={helloRef} aria-label={profile.home.bigWord}>
+          {Array.from(profile.home.bigWord).map((char, index, chars) => (
+            <span className="hello-mask" aria-hidden="true" key={index} style={{ '--hello-index': chars.slice(0, index).filter(value => value.trim()).length }}>
+              <span className="hello-reveal"><span className="hello-char">{char === ' ' ? '\u00A0' : char}</span></span>
+            </span>
+          ))}
         </div>
       </header>
 
@@ -229,7 +306,15 @@ if (anchor) {
             <Link
               key={item.path}
               to={item.path}
-              onMouseEnter={() => !isTransitioning && setHover(item)}
+              onMouseEnter={(event) => {
+                if (isTransitioning) return
+                const option = event.currentTarget.getBoundingClientRect()
+                const robot = event.currentTarget.closest('.home-center').querySelector('.home-3d-wrap').getBoundingClientRect()
+                setHover({
+                  ...item,
+                  robotOffsetX: (option.left + option.width / 2 - robot.left - robot.width / 2) * 0.15,
+                })
+              }}
               onMouseLeave={() => !isTransitioning && setHover(null)}
               onClick={(e) => {
               e.preventDefault()
@@ -247,7 +332,7 @@ if (anchor) {
           ))}
         </nav>
 
-        <Hero3D mouseX={mouseX} modelUrl={profile.home.modelUrl} />
+        <Hero3D mouseX={mouseX} modelUrl={profile.home.modelUrl} hoverPath={hover?.path} hoverOffsetX={hover?.robotOffsetX} />
       </section>
 
       <footer className="home-footer-role">{profile.home.roleLine}</footer>

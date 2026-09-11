@@ -1,6 +1,6 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, useGLTF } from '@react-three/drei'
-import React, { useMemo, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
 
@@ -47,26 +47,46 @@ function ModelSwitch({ url }) {
 }
 
 
-function ParallaxRig({ mouseX, children }) {
+function ParallaxRig({ mouseX, hoverPath, hoverOffsetX, children }) {
   const rig = useRef(null)
+  const motion = useRef({ enabled: false, time: 0 })
 
-  // limits: move sideways + rotate Y only, always relative to cursor (no drift)
-  const MAX_POS_X = 0.55  
-  const MAX_ROT_Y = 0.55
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const pointer = window.matchMedia('(hover: hover) and (pointer: fine)')
+    const update = () => {
+      motion.current.enabled = !reduced.matches && pointer.matches && !document.hidden
+    }
+    update()
+    reduced.addEventListener('change', update)
+    pointer.addEventListener('change', update)
+    document.addEventListener('visibilitychange', update)
+    return () => {
+      reduced.removeEventListener('change', update)
+      pointer.removeEventListener('change', update)
+      document.removeEventListener('visibilitychange', update)
+    }
+  }, [])
 
-  useFrame(() => {
+  useFrame(({ viewport, camera }, delta) => {
     if (!rig.current) return
-
-    const px = THREE.MathUtils.clamp(mouseX.current ?? 0, -1, 1)
-
-    const targetX = px * MAX_POS_X
-    const targetRotY = px * MAX_ROT_Y
-
-    rig.current.position.x = THREE.MathUtils.lerp(rig.current.position.x, targetX, 0.14)
-    rig.current.rotation.y = THREE.MathUtils.lerp(rig.current.rotation.y, targetRotY, 0.14)
-
-    // lock other axes so it stays "front" and only yaws sideways
-    rig.current.rotation.x = 0
+    const { enabled } = motion.current
+    const dt = Math.min(delta, 0.05)
+    if (enabled) motion.current.time += dt
+    // Convert visual pixels at the model's plane to world units.
+    const unitsPerPixel = 1 / viewport.getCurrentViewport(camera, [0, -1.52, 0]).factor
+    const px = enabled ? THREE.MathUtils.clamp(mouseX.current ?? 0, -1, 1) : 0
+    const phase = motion.current.time * Math.PI * 2 / 7
+    const breathe = enabled ? Math.sin(phase) : 0
+    const hoverYaw = enabled ? ({ '/work': -1.5, '/about': 1.5, '/contact': -1 })[hoverPath] ?? 0 : 0
+    const hoverLift = enabled && hoverPath === '/playground' ? 1 : 0
+    const targetX = enabled ? (hoverOffsetX ?? px * 12) * unitsPerPixel : 0
+    // Absolute targets: base stays in the child group; nothing accumulates.
+    const blend = 1 - Math.exp(-3 * dt)
+    rig.current.position.x = THREE.MathUtils.lerp(rig.current.position.x, targetX, blend)
+    rig.current.position.y = THREE.MathUtils.lerp(rig.current.position.y, (breathe * 3 + hoverLift) * unitsPerPixel, blend)
+    rig.current.rotation.x = THREE.MathUtils.lerp(rig.current.rotation.x, THREE.MathUtils.degToRad(breathe * 0.5), blend)
+    rig.current.rotation.y = THREE.MathUtils.lerp(rig.current.rotation.y, THREE.MathUtils.degToRad(px * 2 + breathe * 0.75 + hoverYaw), blend)
     rig.current.rotation.z = 0
   })
 
@@ -74,14 +94,38 @@ function ParallaxRig({ mouseX, children }) {
 }
 
 
-export default function Hero3D({ modelUrl = '', mouseX }) {
+export default function Hero3D({ modelUrl = '', mouseX, hoverPath, hoverOffsetX }) {
   return (
     <div className="home-3d-wrap" aria-hidden="true">
       <Canvas camera={{ position: [0, 0.8, 3.7], fov: 45 }} dpr={[1, 2]}>
-        <ambientLight intensity={0.1} />
+        <ambientLight intensity={0.25} />
         <directionalLight position={[3, 4, 2]} intensity={1.2} />
-        <ParallaxRig mouseX={mouseX}>
+        <directionalLight position={[-1, 1, 4]} intensity={0.6} />
+        <ParallaxRig mouseX={mouseX} hoverPath={hoverPath} hoverOffsetX={hoverOffsetX}>
           <group scale={0.85} position={[0, -1.52, 0]} rotation={[0, 0, 0]}>
+            <mesh position={[0, -0.04, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+              <planeGeometry args={[3.6, 2.4]} />
+              <shaderMaterial
+                transparent
+                depthWrite={false}
+                toneMapped={false}
+                vertexShader={`
+                  varying vec2 shadowUv;
+                  void main() {
+                    shadowUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                  }
+                `}
+                fragmentShader={`
+                  varying vec2 shadowUv;
+                  void main() {
+                    float radius = length((shadowUv - 0.5) * 2.0);
+                    float softness = 1.0 - smoothstep(0.0, 1.0, radius);
+                    gl_FragColor = vec4(0.08, 0.10, 0.12, softness * softness * 0.10);
+                  }
+                `}
+              />
+            </mesh>
             <ModelErrorBoundary fallback={<FallbackModel />}>
               <ModelSwitch url={modelUrl} />
             </ModelErrorBoundary>
@@ -92,4 +136,3 @@ export default function Hero3D({ modelUrl = '', mouseX }) {
     </div>
   )
 }
-

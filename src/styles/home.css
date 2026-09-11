@@ -1,6 +1,6 @@
 /* Home (light hero like goodie.work) */
 body.home-light {
-  background: #eef0f2;
+  background: #f5f6f7;
   color: #121517;
 }
 
@@ -31,7 +31,7 @@ body.home-light a { color: inherit; }
 .home-dot{
   width: 10px;
   height: 10px;
-  background: #0f1417;
+  background: #b8ff35;
   border-radius: 50%;
   margin-top: 3px;
 }
@@ -100,8 +100,8 @@ body.home-light a { color: inherit; }
   display: grid;
   gap: 2px;
   font-size: 14px;
-  opacity: 0.72;
-  color: rgba(0,0,0,.55); /* default (light bg) */
+  opacity: 0.88;
+  color: #555b60;
   transition: color 160ms ease, opacity 160ms ease;
 }
 /* Si algún link está hover, bajar visibilidad de los otros */
@@ -116,6 +116,9 @@ body.home-light a { color: inherit; }
 
 
 .home-menu-item strong{
+  color: #1b2024;
+  font-size: 15.5px;
+  line-height: 21px;
   font-weight: 600;
   opacity: 1;
 }
@@ -125,12 +128,15 @@ body.home-light a { color: inherit; }
   color: rgba(255,255,255,.92);
   opacity: 0.95;
 }
+.home-landing.hasHover .home-menu-item strong{
+  color: inherit;
+}
 
 /* OVERLAY BAND */
 .home-overlay{
   position: fixed;
   inset: 0;
-  background: #111a1d;
+  background: #102426;
 
   z-index: 10;
   pointer-events: none;
@@ -234,8 +240,13 @@ body.home-light a { color: inherit; }
   right: 0;
   bottom: 20px;
   text-align: center;
-  font-size: 14px;
-  opacity: 0.75;
+  font-size: 15.5px;
+  line-height: 21px;
+  opacity: 0.93;
+}
+
+@media (max-width: 480px){
+  .home-menu-item strong{ font-size: 14px; }
 }
 
 /* responsive */
@@ -377,4 +388,55 @@ body.home-light a { color: inherit; }
 }
 .home-brand-link:hover{
   opacity: 0.75;
+}
+
+/* Entrance stays on individual elements, clear of the route overlay layers. */
+@keyframes homeRefinementIn {
+  from { opacity: 0; translate: 0 8px; }
+  to { translate: 0 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .home-open, .home-folio {
+    animation: homeRefinementIn 400ms ease-out 60ms backwards;
+  }
+  .home-brand {
+    animation: homeRefinementIn 440ms ease-out 120ms backwards;
+  }
+  .home-3d-wrap > div {
+    animation: homeRefinementIn 440ms ease-out 220ms backwards;
+  }
+  .home-menu > a {
+    animation: homeRefinementIn 380ms ease-out 320ms backwards;
+  }
+  .home-footer-role {
+    animation: homeRefinementIn 360ms ease-out 440ms backwards;
+  }
+}
+
+/* HOLA: fixed character boxes keep the reveal and lens out of layout. */
+.hello-mask {
+  display: inline-block;
+  clip-path: inset(-12% -15% 0);
+}
+.hello-reveal, .hello-char {
+  display: inline-block;
+}
+.hello-char {
+  transform-origin: center 75%;
+}
+@keyframes helloReveal {
+  from { opacity: 0; transform: translateY(75%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hello-reveal {
+    animation: helloReveal 420ms cubic-bezier(.22,1,.36,1) backwards;
+    animation-delay: calc(var(--hello-index) * 60ms);
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .hello-char {
+    transform: scale(var(--hello-scale, 1));
+    transition: transform 260ms cubic-bezier(.22,1,.36,1);
+  }
 }
